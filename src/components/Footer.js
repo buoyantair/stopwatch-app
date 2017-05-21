@@ -36,7 +36,7 @@ class Footer extends Component{
 
     return (
       <div style={container}>
-        <button style={button} onClick={()=>{console.log("WERE BEING INVADED")}}> START </button>
+        <button style={button} onClick={this.props.callback}> START </button>
       </div>
     );
   }

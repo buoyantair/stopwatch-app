@@ -1,17 +1,8 @@
 import React, { Component } from 'react';
 
 class Stopwatch extends Component{
-  constructor(props){
-    super(props);
-    this.state = {
-        hours: this.props.hours,
-        minutes: this.props.minutes,
-        seconds: this.props.seconds
-    }
-  }
-
   leadingzero(num){
-    return num < 10 && num > 0 ? "0" + num : num;
+    return num < 10 && num >= 0 ? "0" + num : num;
   }
 
   render(){
@@ -75,9 +66,9 @@ class Stopwatch extends Component{
 
     return (
       <div style={container}>
-        <div style={hours}>{this.leadingzero(this.state.hours)}</div>
-        <div style={minutes}>{this.leadingzero(this.state.hours)}</div>
-        <div style={seconds}>{this.leadingzero(this.state.hours)}</div>
+        <div style={hours}>{this.leadingzero(this.props.hours)}</div>
+        <div style={minutes}>{this.leadingzero(this.props.minutes)}</div>
+        <div style={seconds}>{this.leadingzero(this.props.seconds)}</div>
       </div>
     );
   }
