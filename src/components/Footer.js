@@ -14,7 +14,7 @@ class Footer extends Component{
       background: "#36382E",
       textAlign: "center",
       display: "flex",
-      flexFlow: "column wrap",
+      flexFlow: "row wrap",
       justifyContent: "center",
       color: "#EDE6E3"
     }
@@ -36,7 +36,9 @@ class Footer extends Component{
 
     return (
       <div style={container}>
-        <button style={button} onClick={this.props.callback}> START </button>
+        <button style={button} onClick={this.props.start}> START </button>
+        <button style={button} onClick={this.props.stop}> STOP </button>
+        <button style={button} onClick={this.props.reset}> RESET </button>
       </div>
     );
   }

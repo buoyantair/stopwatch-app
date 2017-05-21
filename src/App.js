@@ -14,10 +14,22 @@ class App extends Component {
       seconds: 0
     };
     this.interval = NaN;
+    this.started = false;
+    this.stopped = true;
   };
 
   resetState(){
     this.setState({hours: 0, minutes: 0, seconds: 0});
+    this.started = false;
+  }
+
+  startStopwatch(){
+    this.started = true;
+    this.stopped = false;
+  }
+
+  stopStopwatch(){
+    this.stopped = true;
   }
 
   componentWillMount(){
@@ -25,22 +37,24 @@ class App extends Component {
   }
 
   componentDidMount(){
-    this.interval = setInterval(()=>{
-      if(this.state.seconds === 59){
-        this.setState({hours: this.state.hours, minutes: this.state.minutes+1, seconds: 0});
-      } else if (this.state.minutes === 59){
-        this.setState({hours: this.state.hours+1, minutes: 0, seconds: 0});
-      } else {
-        this.setState({hours: this.state.hours, minutes: this.state.minutes, seconds: this.state.seconds+1});
-      }
-    }, 1000);
+      this.interval = setInterval(()=>{
+        if(this.started === true && this.stopped === false){
+          if (this.state.minutes === 59 && this.state.seconds === 59){
+            this.setState({hours: this.state.hours+1, minutes: 0, seconds: 0});
+          } else if(this.state.seconds === 59){
+            this.setState({hours: this.state.hours, minutes: this.state.minutes+1, seconds: 0});
+          } else {
+            this.setState({hours: this.state.hours, minutes: this.state.minutes, seconds: this.state.seconds+1});
+          }
+        }
+      }, 1000);
   }
   render() {
     return (
       <div>
         <AppHeader />
         <Stopwatch hours={this.state.hours} minutes={this.state.minutes} seconds={this.state.seconds} />
-        <Footer callback={this.resetState.bind(this)}/>
+        <Footer start={this.startStopwatch.bind(this)} stop={this.stopStopwatch.bind(this)}  reset={this.resetState.bind(this)}/>
       </div>
     );
   }
